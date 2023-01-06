@@ -3,7 +3,7 @@
 source functions.sh
 source log-functions.sh
 
-# logInfoMessage "I'll validate the git commit id and Jira issue commit id for the branch [$BRANCH] in the repository [$CODEBASE_DIR]"
+logInfoMessage "I'll validated the git commit id and Jira issue commit id for the [$CODEBASE_DIR] repository."
 sleep  $SLEEP_DURATION
 
 GIT_COMMIT_ID=$(git log --pretty=format:"%H")
@@ -23,19 +23,19 @@ done < <( cat commit.json | jq .comment[]|egrep -o 'https://[^ ]+/commit/[a-f0-9
 
 if [ $GLOBAL_STATUS == 0 ]
 then
-     generateOutput  COMMIT_MESSAGE_VALIDATOR true "Congratulations build succeeded!!!"
-     logInfoMessage "Commit message is matches to Jira task description."
-     logInfoMessage "commit message validator sucessfull"
+     generateOutput  COMMIT_ID_VALIDATOR true "Congratulations build succeeded!!!"
+     logInfoMessage "Commit id is matches to Jira issue commit id."
+     logInfoMessage "Commit id validatation sucessfull"
 
 else
-     generateOutput COMMIT_MESSAGE_VALIDATOR false "Commit message validation is failed please check!!!!!"
+     generateOutput COMMIT_ID_VALIDATOR false "Commit message validation is failed please check!!!!!"
      if [[ $VALIDATION_FAILURE_ACTION == "FAILURE" ]]
      then
-          logErrorMessage "Commit message doesn't match to Jira task description"
-          logErrorMessage "commit message validator unsucessfull"
+          logErrorMessage "Commit id doesn't match to Jira issue commit id"
+          logErrorMessage "Commit id validatation unsucessfull"
           exit 1
 
      else
-          logWarningMessage "Commit id's doesn't match to Jira task description please check!!!!!"
+          logWarningMessage "Commit id doesn't match to Jira issue commit id please check!!!!!"
      fi
 fi
