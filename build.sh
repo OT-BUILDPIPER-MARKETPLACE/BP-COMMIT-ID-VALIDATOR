@@ -3,6 +3,9 @@
 source functions.sh
 source log-functions.sh
 
+# logInfoMessage "I'll validate the git commit id and Jira issue commit id for the branch [$BRANCH] in the repository [$CODEBASE_DIR]"
+sleep  $SLEEP_DURATION
+
 GIT_COMMIT_ID=$(git log --pretty=format:"%H")
 
 GLOBAL_STATUS=1
