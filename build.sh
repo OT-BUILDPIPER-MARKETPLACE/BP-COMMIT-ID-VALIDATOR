@@ -6,8 +6,6 @@ source log-functions.sh
 logInfoMessage "I'll validated the git commit id and Jira issue commit id for the [$CODEBASE_DIR] repository."
 sleep  $SLEEP_DURATION
 
-cd  $WORKSPACE/${CODEBASE_DIR}
-
 GIT_COMMIT_ID=$(git log --pretty=format:"%H")
 
 GLOBAL_STATUS=1
@@ -21,7 +19,7 @@ while IFS= read  line; do
 		fi
 	done	
 	GLOBAL_STATUS=$(( GLOBAL_STATUS&LOCAL_STATUS ))	
-done < <( cat commit.json | jq .comment[]|egrep -o 'https://[^ ]+/commit/[a-f0-9]*'|cut -d "/" -f 8 )
+done < <( cat pipeline_context_param | jq .comment[]|egrep -o 'https://[^ ]+/commit/[a-f0-9]*'|cut -d "/" -f 8 )
 
 if [ $GLOBAL_STATUS == 0 ]
 then
@@ -30,7 +28,7 @@ then
      logInfoMessage "Commit id validatation sucessfull"
 
 else
-     generateOutput COMMIT_ID_VALIDATOR false "Commit message validation is failed please check!!!!!"
+     generateOutput COMMIT_ID_VALIDATOR false "Commit id validation is failed please check!!!!!"
      if [[ $VALIDATION_FAILURE_ACTION == "FAILURE" ]]
      then
           logErrorMessage "Commit id doesn't match to Jira issue commit id"
