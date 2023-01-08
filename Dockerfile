@@ -2,7 +2,6 @@ FROM alpine
 RUN apk add --no-cache --upgrade bash
 RUN apk add jq
 RUN apk add git
-COPY commit.json .
 COPY build.sh . 
 RUN chmod +x build.sh
 COPY BP-BASE-SHELL-STEPS . 
