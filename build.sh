@@ -3,6 +3,8 @@
 source functions.sh
 source log-functions.sh
 
+cd $WORKSPACE/$CODEBASE_DIR
+
 logInfoMessage "I'll validated the git commit id and Jira issue commit id for the [$CODEBASE_DIR] repository."
 sleep  $SLEEP_DURATION
 
