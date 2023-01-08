@@ -4,11 +4,15 @@ source functions.sh
 source log-functions.sh
 
 cd $WORKSPACE/$CODEBASE_DIR
+echo "$WORKSPACE/$CODEBASE_DIR"
 
 logInfoMessage "I'll validated the git commit id and Jira issue commit id for the [$CODEBASE_DIR] repository."
 sleep  $SLEEP_DURATION
 
 GIT_COMMIT_ID=$(git log --pretty=format:"%H")
+
+echo "$GIT_COMMIT_ID"
+pwd
 
 GLOBAL_STATUS=1
 while IFS= read  line; do
