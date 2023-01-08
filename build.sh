@@ -19,7 +19,7 @@ while IFS= read  line; do
 		fi
 	done	
 	GLOBAL_STATUS=$(( GLOBAL_STATUS&LOCAL_STATUS ))	
-done < <( cat pipeline_context_param | jq .comment[]|egrep -o 'https://[^ ]+/commit/[a-f0-9]*'|cut -d "/" -f 8 )
+done < <( cat /bp/data/pipeline_context_param | jq .comment[]|egrep -o 'https://[^ ]+/commit/[a-f0-9]*'|cut -d "/" -f 8 )
 
 if [ $GLOBAL_STATUS == 0 ]
 then
