@@ -31,13 +31,7 @@ then
 
 else
      generateOutput COMMIT_ID_VALIDATOR false "Commit id validation is failed please check!!!!!"
-     if [[ $VALIDATION_FAILURE_ACTION == "FAILURE" ]]
-     then
           logErrorMessage "Commit id doesn't match to Jira issue commit id"
           logErrorMessage "Commit id validatation unsucessfull"
           exit 1
-
-     else
-          logWarningMessage "Commit id doesn't match to Jira issue commit id please check!!!!!"
-     fi
 fi
